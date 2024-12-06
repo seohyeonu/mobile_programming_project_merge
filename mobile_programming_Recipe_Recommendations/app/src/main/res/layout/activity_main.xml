@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAF2"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:layout_width="77dp"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/myprof_1"/>
+
+                <FrameLayout
+                    android:layout_width="321dp"
+                    android:layout_height="74dp">
+
+                    <ImageButton
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@null"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/myprof_2"/>
+
+                    <TextView
+                        android:id="@+id/userNameTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left|center"
+                        android:text="User Name"
+                        android:layout_marginLeft="3dp"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:background="@android:color/transparent" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="104dp"
+                android:layout_height="90dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/pic4" />
+
+            <ImageButton
+                android:id="@+id/button1"
+                android:layout_width="98dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/mybtn1" />
+            <ImageButton
+                android:id="@+id/button2"
+                android:layout_width="98dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/mybtn2" />
+
+            <ImageButton
+                android:id="@+id/button3"
+                android:layout_width="99dp"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/mybtn3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="95dp"
+                android:layout_height="40dp"
+                android:src="@drawable/search1"
+                android:background="@null" />
+
+            <EditText
+                android:id="@+id/editTextWithBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/search_main"
+                android:hint="  식재료, 레시피등을 입력하세요."
+                android:textSize="12dp"
+                android:textColor="#000000"
+                android:textStyle="italic"
+                android:padding="10dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/button4"
+                android:layout_width="match_parent"
+                android:layout_height="116dp"
+                android:background="@null"
+                android:scaleType="fitXY"
+                android:src="@drawable/rcmd" />
+
+            <ImageButton
+                android:id="@+id/button5"
+                android:layout_width="match_parent"
+                android:layout_height="283dp"
+                android:background="@null"
+                android:padding="5dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/pic5" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/horizontalRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="242dp" />
+
+    </LinearLayout>
+
+</ScrollView>
