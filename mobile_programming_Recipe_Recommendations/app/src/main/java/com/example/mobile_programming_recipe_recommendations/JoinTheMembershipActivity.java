@@ -30,7 +30,7 @@ public class JoinTheMembershipActivity extends AppCompatActivity {
     String [] newUserInfo = new String[3];
 
     int find_index = -1;
-    private int is_changed_name = -1;
+    private int is_changed_input_page1 = -1;
     private int is_duplicate_check = -1;
     private int is_ready_forwarding = -1;
     private int is_random_checkNum = -9999990;
@@ -96,7 +96,8 @@ public class JoinTheMembershipActivity extends AppCompatActivity {
                     }
                 }
                 else {
-                    is_changed_name = -1;
+                    is_random_checkNum = -9999990;
+                    is_changed_input_page1 = -1;
                 }
                 appearedInputCheckNum.setText("");
             }
@@ -136,6 +137,8 @@ public class JoinTheMembershipActivity extends AppCompatActivity {
                     } else {
                         forwardingButton.setVisibility(View.GONE);
                     }
+                    is_random_checkNum = -9999990;
+                    is_changed_input_page1 = -1;
                     appearedInputCheckNum.setText("");
                 }
             }
@@ -175,14 +178,11 @@ public class JoinTheMembershipActivity extends AppCompatActivity {
                     appearedInputCheckNum.setVisibility(View.VISIBLE);
                     appearedCheckButton.setVisibility(View.VISIBLE);
 
-                    is_changed_name = 0;
+                    is_changed_input_page1 = 0;
                 }
                 else{
                     if(inputName_ID.getText().toString().length() == 0){
                         Toast.makeText(getApplicationContext(), "이름을 입력해주세요", Toast.LENGTH_SHORT).show();
-                    }
-                    else if(inputPhoneNum.getText().toString().length() == 0){
-                        Toast.makeText(getApplicationContext(), "전화번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
                     }
                     else if(is_ready_forwarding == -1){
                         Toast.makeText(getApplicationContext(), "전화번호 입력이 잘못됐습니다.", Toast.LENGTH_SHORT).show();
@@ -191,14 +191,14 @@ public class JoinTheMembershipActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "이미 등록된 회원 입니다.", Toast.LENGTH_SHORT).show();
                     }
                 }
-                is_final_checkStatus = -1;
                 appearedInputCheckNum.setText("");
             }
         });
+        // '확인' 버튼 동작에 대한 부분입니다.
         appearedCheckButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(is_changed_name == 0 && is_ready_forwarding == 0){
+                if(is_changed_input_page1 == 0 && is_ready_forwarding == 0){
                     if(appearedInputCheckNum.getText().toString().equals(String.valueOf(is_random_checkNum)) == true){
                         Toast.makeText(getApplicationContext(), "인증번호가 확인 되었습니다.", Toast.LENGTH_SHORT).show();
                         newUserInfo[0] = inputName_ID.getText().toString();
@@ -231,8 +231,8 @@ public class JoinTheMembershipActivity extends AppCompatActivity {
                     if(inputName_ID.getText().toString().length() == 0){
                         Toast.makeText(getApplicationContext(), "이름을 입력해주세요", Toast.LENGTH_SHORT).show();
                     }
-                    else if(is_changed_name == -1){
-                        Toast.makeText(getApplicationContext(), "이름에 변경점이 있어 '전송'을 다시 눌러주세요.", Toast.LENGTH_SHORT).show();
+                    else if(is_changed_input_page1 == -1){
+                        Toast.makeText(getApplicationContext(), "입력이 바뀌어 다시 '전송' 버튼을 눌러주세요", Toast.LENGTH_SHORT).show();
                     }
                     else if(is_ready_forwarding == -1){
                         Toast.makeText(getApplicationContext(), "전화번호 입력이 잘못됐습니다.", Toast.LENGTH_SHORT).show();
@@ -240,6 +240,7 @@ public class JoinTheMembershipActivity extends AppCompatActivity {
                 }
             }
         });
+        // '중복확인' 버튼 동작에 대한 부분입니다.
         duplicate_checkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -276,7 +277,7 @@ public class JoinTheMembershipActivity extends AppCompatActivity {
                     setResult(RESULT_OK, get_intent);
                     finish();
                 }
-                else{
+                else if(is_final_checkStatus != -1){
                     if(inputName_ID.getText().toString().length() == 0){
                         Toast.makeText(getApplicationContext(), "아이디를 입력해주세요", Toast.LENGTH_SHORT).show();
                     }
@@ -291,6 +292,17 @@ public class JoinTheMembershipActivity extends AppCompatActivity {
                     }
                     else if(appearedinputPassword.getText().toString().equals(inputPhoneNum.getText().toString()) == false){
                         Toast.makeText(getApplicationContext(), "입력된 비밀번호가 서로 다릅니다.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else {
+                    if(inputName_ID.getText().toString().length() == 0){
+                        Toast.makeText(getApplicationContext(), "이름을 입력해주세요", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(inputPhoneNum.getText().toString().length() == 0){
+                        Toast.makeText(getApplicationContext(), "전화번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "번호 인증을 해주세요.", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

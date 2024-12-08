@@ -28,7 +28,7 @@ public class FindUserPasswordActivity extends AppCompatActivity {
     ArrayList<String> getUserList = new ArrayList<String>();
     int find_index = -1;
 
-    private int is_changed_id = -1;
+    private int is_changed_input = -1;
     private int is_ready_forwarding = -1;
     private int is_random_checkNum = -9999990;
     private int is_final_checkStatus = -1;
@@ -72,7 +72,7 @@ public class FindUserPasswordActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                is_changed_id = -1;
+                is_changed_input = -1;
                 is_random_checkNum = -9999990;
                 appearedInputCheckNum.setText("");
                 if(is_final_checkStatus == 0) {
@@ -104,6 +104,7 @@ public class FindUserPasswordActivity extends AppCompatActivity {
                 }
                 is_ready_forwarding = -1;
                 is_random_checkNum = -9999990;
+                is_changed_input = -1;
                 appearedInputCheckNum.setText("");
                 if(is_final_checkStatus == 0){
                     is_final_checkStatus = -2;
@@ -179,7 +180,7 @@ public class FindUserPasswordActivity extends AppCompatActivity {
                 }
                 else if(appearedInputCheckNum.getText().toString().equals(String.valueOf(is_random_checkNum)) == true) {
                     Toast.makeText(getApplicationContext(), "인증이 완료 됐습니다.", Toast.LENGTH_SHORT).show();
-                    is_changed_id = 0;
+                    is_changed_input = 0;
                     is_final_checkStatus = 0;
 
                     inputID.setFocusableInTouchMode(false);
@@ -198,12 +199,15 @@ public class FindUserPasswordActivity extends AppCompatActivity {
                     appearedPasswordIcon.setVisibility(View.VISIBLE);
                     appearedInputPassword.setVisibility(View.VISIBLE);
                 }
+                else if(is_changed_input == -1){
+                    Toast.makeText(getApplicationContext(), "입력이 바뀌어 다시 '전송' 버튼을 눌러주세요", Toast.LENGTH_SHORT).show();
+                }
                 else {
                     Toast.makeText(getApplicationContext(), "인증번호 입력이 틀렸습니다.", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        // 새로운 비밀번호 적용해주는 작업을 해줘야 함 (미완)
+        // 새로운 비밀번호 적용해주는 작업을 해줘야 함 (완료)
         newUserPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -217,16 +221,28 @@ public class FindUserPasswordActivity extends AppCompatActivity {
                     setResult(RESULT_OK, get_intent);
                     finish();
                 }
-                else if(appearedInputPassword.getText().toString().length() == 0) {
-                    Toast.makeText(getApplicationContext(), "새로 등록 할 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                else if(is_final_checkStatus != -1){
+                    if(appearedInputPassword.getText().toString().length() == 0) {
+                        Toast.makeText(getApplicationContext(), "새로 등록 할 비밀번호를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(appearedInputCheckNum.getText().toString().length() == 0) {
+                        Toast.makeText(getApplicationContext(), "비밀번호 재입력 칸에 입력을 해주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(appearedInputPassword.getText().toString().equals(appearedInputCheckNum.getText().toString()) == false) {
+                        Toast.makeText(getApplicationContext(), "입력된 비밀번호가 서로 다릅니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else if(appearedInputCheckNum.getText().toString().length() == 0) {
-                    Toast.makeText(getApplicationContext(), "비밀번호 재입력 칸에 입력을 해주세요.", Toast.LENGTH_SHORT).show();
+                else {
+                    if(inputID.getText().toString().length() == 0) {
+                        Toast.makeText(getApplicationContext(), "아이디를 입력 해주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                    else if(inputPhoneNum.getText().toString().length() == 0) {
+                        Toast.makeText(getApplicationContext(), "전화번호를 입력 해주세요.", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "인증이 완료되지 않았습니다.", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else if(appearedInputPassword.getText().toString().equals(appearedInputCheckNum.getText().toString()) == false) {
-                    Toast.makeText(getApplicationContext(), "입력된 비밀번호가 서로 다릅니다.", Toast.LENGTH_SHORT).show();
-                }
-
             }
         });
         //
